@@ -86,13 +86,15 @@ export function TransportPage() {
     return (
         <div>
             <div>
+                <p className="font-bold text-4xl ml-[290px] mb-8 mt-8">Заказать технику</p>
                 <TransportSort selectChange={selectChange}/>
             </div>
                 <UserList users={useUsers} callback={useritemCallback}/>
-            <div >
+            <div className="text-center">
+                <p className="font-bold text-2xl mt-10">Укажите пункт назначения</p>
                 <YMaps >
-                    <div className="mx-60 my-10">
-                        <Map width="1000px" height="500px"  defaultState={{ center: [55.75, 37.57], zoom: 9 }}
+                    <div className="mx-72 my-10">
+                        <Map width="945px" height="500px"  defaultState={{ center: [55.75, 37.57], zoom: 9 }}
                              onClick={(event: any) => { // устанавливаем маркер и записываем координаты в стейт
                                  setLatitude(event.get('coords')[0])
                                  setLongitude(event.get('coords')[1])
@@ -101,15 +103,20 @@ export function TransportPage() {
                     </div>
                 </YMaps>
             </div>
-            <div>
-                <label htmlFor="start">Начало бронирования: </label>
-                <input id="start" type="datetime-local" name="startdatetime" onChange={event => setStartDate(event.target.value)}/>
-            </div>
-            <div>
-                <label htmlFor="end">Конец бронирования: </label>
-                <input id="end" type="datetime-local" name="enddatetime" onChange={event => setEndDate(event.target.value)}/>
+            <p className="font-bold text-2xl text-center mb-6">Детали вашего заказа</p>
+            <div  className="text-left mx-[650px]">
+                <div>
+                    <label htmlFor="start">Начало бронирования: </label>
+                    <input id="start" type="datetime-local" name="startdatetime" onChange={event => setStartDate(event.target.value)}/>
+                </div>
+                <div>
+                    <label htmlFor="end">Конец бронирования: </label>
+                    <input id="end" type="datetime-local" name="enddatetime" onChange={event => setEndDate(event.target.value)}/>
+                </div>
             </div>
             <OrderForm transporttype={useType} startDate={startDate} endDate={endDate} latitude={latitude} longitude={longitude}/>
         </div>
     )
 };
+
+

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {IUser} from "../types/types";
 import UserItem from "./UserItem";
 
@@ -8,11 +8,17 @@ interface UserListProps {
 }
 
 const UserList: FC<UserListProps> = ({users, callback}) => {
+    const [chosenType, setChosenType] = useState("")
+
+
+
     return (
-        <div className="grid grid-cols-3 gap-4">
-            {users.map(user =>
-                <UserItem user={user} callback={callback}/>
-            )}
+        <div className="mx-72">
+            <div className="grid grid-cols-3 gap-4 place-content-center">
+                {users.map(user =>
+                    <UserItem user={user} callback={callback} chosenType={chosenType} choseTypeCallback={setChosenType}/>
+                )}
+            </div>
         </div>
     );
 };

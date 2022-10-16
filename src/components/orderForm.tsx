@@ -19,12 +19,15 @@ function getPhone() {
 const OrderForm:FC<orderProps> = ({transporttype, startDate, endDate, latitude, longitude}) => {
     let navigate = useNavigate();
     async function confirm() {
+        var startDT = new Date(startDate);
+        var endDT = new Date(endDate);
+
         try {
             const response = await axios.post('https://scipie.ru/api/polus/orders/', {
                 user_phone: getPhone(),
                 transport_type: transporttype,
-                start: startDate,
-                end: endDate,
+                start: startDT.toISOString(),
+                end: endDT.toISOString(),
                 latitude: latitude,
                 longitude: longitude
             });
@@ -36,14 +39,14 @@ const OrderForm:FC<orderProps> = ({transporttype, startDate, endDate, latitude, 
     }
 
     return (
-        <div>
+        <div className="text-left mx-[650px]">
             {/*<form>*/}
                 <div> Тип транспорта: {transporttype} </div>
-                <div> Начало бронирования: {startDate} </div>
-                <div> Конец бронирования: {endDate} </div>
+                {/*<div> Начало бронирования: {startDate} </div>*/}
+                {/*<div> Конец бронирования: {endDate} </div>*/}
                 <div> Широта: {latitude} </div>
                 <div> Долгота {longitude} </div>
-                <div><button onClick={event => confirm()}>Подтвердить</button></div>
+                <div className="text-center"><button className="border-2 bg-amber-400 py-1 px-14 font-bold text-2xl mt-2 mb-10 rounded-2xl hover:text-amber-400 hover:bg-black" onClick={event => confirm()}>Заказать</button></div>
             {/*</form>*/}
         </div>
     );
